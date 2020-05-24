@@ -1,0 +1,2 @@
+rootProject.name='CMC Online'
+include ':app'
