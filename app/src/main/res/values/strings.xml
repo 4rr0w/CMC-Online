@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">CMC Online</string>
+    <string name="Login">Log In</string>
+    <string name="signup"> Sign Up Here</string>
+    <string name="signupdone"> Sign Up</string>
+    <string name="label1">Don\'t wait</string>
+    <string name="logo_name">Spotify</string>
+    <string name="label2">Log in or create a new account now</string>
+    <string name="email">Enter Email</string>
+    <string name="password">Password</string>
+    <string name="social">Or Log In using</string>
+    <string name="phone">Phone</string>
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="title_activity_signup">signup</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
