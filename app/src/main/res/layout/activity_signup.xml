@@ -36,11 +36,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="45dp"
             android:fontFamily="sans-serif-condensed-light"
             android:text="Enter Your Details"
             android:textColor="#fff"
-            android:textSize="38dp" />
+            android:textSize="35dp" />
 
         <RelativeLayout
             android:layout_alignParentBottom="true"
@@ -48,7 +48,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
 
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/logo">
 
@@ -66,9 +66,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorWhite"
                     android:hint="@string/fname"
-                    android:maxLength="10"
+                    android:maxLength="50"
                     android:imeOptions="actionNext"
-                    android:inputType="phone"
                     android:textColor="@color/colorWhite"
                     android:textColorHint="@color/colorHint"
                     android:textSize="16sp"
@@ -92,9 +91,8 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorWhite"
                     android:hint="@string/lname"
-                    android:maxLength="10"
+                    android:maxLength="50"
                     android:imeOptions="actionNext"
-                    android:inputType="phone"
                     android:textColor="@color/colorWhite"
                     android:textColorHint="@color/colorHint"
                     android:textSize="16sp"
@@ -130,8 +128,108 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lnlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_below="@+id/lnphone">
+
+
+                <EditText
+                    android:id="@+id/tvlocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorWhite"
+                    android:hint="Current City, State"
+                    android:maxLength="50"
+                    android:imeOptions="actionNext"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/colorHint"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnzone"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_below="@id/lnlocation">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight=".28"
+
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/tvzone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:spinnerMode="dropdown"
+                        android:text="hello"
+                        />
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lnunit"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_below="@id/lnzone">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight=".28"
+
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/tvunit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:spinnerMode="dropdown"
+                        android:text="hello"
+                        />
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lndep"
-                android:layout_below="@id/lnphone"
+                android:layout_below="@id/lnunit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -216,7 +314,7 @@
                 android:background="@drawable/button_white"
                 android:text="@string/signupdone"
                 android:textAllCaps="false"
-                android:textColor="@color/colorRose"
+
                 android:textSize="18sp" />
 
 

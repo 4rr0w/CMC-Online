@@ -102,17 +102,16 @@
 
             </LinearLayout>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btlogin"
                 android:layout_below="@id/lnpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button_white"
                 android:text="@string/Login"
                 android:textAllCaps="false"
-                android:textColor="@color/colorRose"
+                android:textColor="@color/colorWhite"
                 android:textSize="18dp" />
 
             <TextView
@@ -126,16 +125,16 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="18dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/tosignup"
                 android:layout_below="@id/or"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/button_transparent"
                 android:text="@string/signup"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
+                android:background="@drawable/button_transparent"
                 android:textSize="18dp" />
 
 

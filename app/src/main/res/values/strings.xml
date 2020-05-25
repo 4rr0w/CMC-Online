@@ -15,4 +15,23 @@
     <string name="title_activity_signup">signup</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="instant_validation">(instant validation)</string>
+
+    <string-array name="zones">
+        <item> (Select Containment Zone) </item>
+        <item> Green Zone</item>
+        <item> Orange Zone</item>
+        <item> Red Zone</item>
+
+    </string-array>
+
+    <string-array name="units">
+        <item> (Select Your Unit) </item>
+        <item> 13BRD </item>
+        <item> AFS Palam </item>
+        <item> AFS Sohna Road </item>
+        <item> AFS New Delhi </item>
+        <item> Other </item>
+
+    </string-array>
 </resources>
