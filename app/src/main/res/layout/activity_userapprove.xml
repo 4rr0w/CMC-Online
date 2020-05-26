@@ -9,7 +9,7 @@
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="325dp"
+        android:layout_height="330dp"
         android:background="@drawable/gradientbackground">
 
         <Button
@@ -53,7 +53,7 @@
                 android:textSize="28sp"/>
             <TextView
                 android:id="@+id/unit"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 android:textSize="18sp"/>
             <TextView
                 android:id="@+id/zone"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                 android:textSize="18sp"/>
             <TextView
                 android:id="@+id/departing"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +83,17 @@
                 android:textSize="18sp"/>
             <TextView
                 android:id="@+id/arriving"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Arriving on"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/totalpeople"
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +107,7 @@
         </LinearLayout>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/topPanel"
@@ -208,7 +218,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/remarks"/>
+                android:src="@drawable/docremark"/>
             <TextView
                 android:id="@+id/medremark"
                 android:textStyle="bold"

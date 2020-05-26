@@ -34,6 +34,7 @@ public class adminlogin extends AppCompatActivity {
 
     Button signup;
     boolean is_valid;
+    LoadingDialog loadingDialog = new LoadingDialog((adminlogin.this));
 
 
     @Override
@@ -42,6 +43,13 @@ public class adminlogin extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public void onBackPressed() {
+
+        Intent login = new Intent(adminlogin.this,login.class);
+        startActivity(login);
+        finish();
     }
 
     @Override
@@ -113,7 +121,8 @@ public class adminlogin extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final loading loadingdialog = new loading(adminlogin.this);
+                loadingDialog.startLoadingDialog();
+
 
                 try {
                     InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
@@ -171,6 +180,7 @@ public class adminlogin extends AppCompatActivity {
                     password.setError("Minimun length should be 6");
                     is_valid =false;
                 }
+                loadingDialog.dismissDialog();
                 if (is_valid){
 
                     firstname = fname.getText().toString();

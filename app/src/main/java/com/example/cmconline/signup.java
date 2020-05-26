@@ -19,7 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 
@@ -28,13 +31,14 @@ import java.util.regex.Pattern;
 
 public class signup extends AppCompatActivity {
     DatePickerDialog picker;
-    public static EditText fname, lname, phone, departure, expctedarrival ,password, location;
+    DatabaseReference dref;
+    public static EditText fname, lname, phone, departure, expctedarrival ,password, location,numpeople;
     Spinner zone, unit;
-    public static String zone_str, unit_str, firstname, lastname, phonenumber,depdate,exparrdate,loc,pass;
+    public static String zone_str, unit_str, firstname, lastname, phonenumber,depdate,exparrdate,loc,pass,people;
 
     Button signup;
     boolean is_valid;
-    private FirebaseAuth mAuth;
+
 
 
     @Override
@@ -43,6 +47,14 @@ public class signup extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent login = new Intent(signup.this,login.class);
+        startActivity(login);
+        finish();
     }
 
     @Override
@@ -60,6 +72,7 @@ public class signup extends AppCompatActivity {
         zone = findViewById(R.id.tvzone);
         unit = findViewById(R.id.tvunit);
         signup = findViewById(R.id.btsignup);
+        numpeople = findViewById(R.id.tvperson);
 
 
 
@@ -68,6 +81,7 @@ public class signup extends AppCompatActivity {
 
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.zones,R.layout.simple_spinner);
+        adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
         adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
         zone.setAdapter(adapter1);
         zone.setSelection(0);
@@ -88,6 +102,8 @@ public class signup extends AppCompatActivity {
 
             }
         });
+
+
 
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.units,R.layout.simple_spinner);
         adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -175,7 +191,7 @@ public class signup extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final loading loadingdialog = new loading(signup.this);
+
                 try {
                     InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -220,6 +236,14 @@ public class signup extends AppCompatActivity {
                     location.setError("This field can not be blank");
                     is_valid =false;
                 }
+                if (numpeople.getText().toString().trim().equalsIgnoreCase("")) {
+                    numpeople.setError("This field can not be blank");
+                    is_valid =false;
+                }
+                if (numpeople.getText().toString().trim().equalsIgnoreCase("0")) {
+                    numpeople.setError("Can't be zero.");
+                    is_valid =false;
+                }
 
                 if (zone_str.equalsIgnoreCase("(Select Containment Zone)")) {
                     ((TextView)zone.getSelectedView()).setError("This field is required!");
@@ -251,7 +275,7 @@ public class signup extends AppCompatActivity {
                     exparrdate = expctedarrival.getText().toString();
                     loc = location.getText().toString();
                     pass = password.getText().toString();
-
+                    people = numpeople.getText().toString();
 
                     Intent tootp = new Intent(signup.this,otp.class);
                     startActivity(tootp);

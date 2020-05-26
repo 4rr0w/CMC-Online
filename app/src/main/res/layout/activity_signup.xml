@@ -52,17 +52,27 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/logo">
 
+
+            <LinearLayout
+                android:id="@+id/namel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+
             <LinearLayout
                 android:id="@+id/lnfname"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
 
                 <EditText
+
                     android:id="@+id/tvfname"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorWhite"
                     android:hint="@string/fname"
@@ -78,35 +88,38 @@
 
             <LinearLayout
                 android:id="@+id/lnlname"
-                android:layout_width="match_parent"
+
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_below="@+id/lnfname">
+                android:layout_below="@+id/lnfname"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
 
 
                 <EditText
                     android:id="@+id/tvlname"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorWhite"
                     android:hint="@string/lname"
-                    android:maxLength="50"
                     android:imeOptions="actionNext"
+                    android:maxLength="50"
+                    android:maxLines="1"
                     android:textColor="@color/colorWhite"
                     android:textColorHint="@color/colorHint"
-                    android:textSize="16sp"
-                    android:maxLines="1"
-                    />
+                    android:textSize="16sp" />
 
             </LinearLayout>
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/lnphone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_below="@id/lnlname"
+                android:layout_below="@id/namel"
                 android:orientation="horizontal">
 
 
@@ -128,12 +141,38 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lnperson"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_below="@id/lnphone"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/tvperson"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorWhite"
+                    android:hint="Number of people (Including Self)"
+                    android:maxLength="1"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/colorHint"
+                    android:textSize="16sp"
+                    android:maxLines="1"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lnlocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:layout_below="@+id/lnphone">
+                android:layout_below="@+id/lnperson">
 
 
                 <EditText

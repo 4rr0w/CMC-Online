@@ -26,9 +26,9 @@ public class userapprove extends AppCompatActivity {
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String id = mAuth.getUid();
+    LoadingDialog loadingDialog = new LoadingDialog((userapprove.this));
 
-    TextView name, unit, zone, location, departing, arriving, phone,medremark;
+    TextView name, unit, zone, location, departing, arriving, phone,medremark,totalpeople;
     EditText movremark;
     Spinner istapprove, finalapprove;
     Button save,back;
@@ -36,9 +36,18 @@ public class userapprove extends AppCompatActivity {
     int sp1,sp2;
 
     @Override
+    public void onBackPressed() {
+
+        Intent admin = new Intent(userapprove.this,admin.class);
+        startActivity(admin);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userapprove);
+        loadingDialog.startLoadingDialog();
 
         name = findViewById(R.id.name);
         unit = findViewById(R.id.unit);
@@ -55,6 +64,7 @@ public class userapprove extends AppCompatActivity {
         back = findViewById(R.id.back);
         istapprove = findViewById(R.id.istapprove);
         finalapprove = findViewById(R.id.finalapprove);
+        totalpeople = findViewById(R.id.totalpeople);
         approve = getResources().getStringArray(R.array.approves);
 
 
@@ -66,7 +76,7 @@ public class userapprove extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                           @Override
                                           public void onSuccess(DocumentSnapshot d) {
-                                              final loading loadingdialog = new loading(userapprove.this);
+
 
                                               int i = (int) (long)  d.get("movement");
                                               int j = (int) (long)  d.get("final");
@@ -97,6 +107,8 @@ public class userapprove extends AppCompatActivity {
                                               medremark.setText("Medical Remark : "+ d.getString("Remark"));
                                               location.setText(d.getString("location"));
                                               phone.setText("+91 "+d.getString("phone"));
+                                              totalpeople.setText("Number of person : " + (String)d.get("people").toString());
+                                              loadingDialog.dismissDialog();
 
 
 
@@ -148,6 +160,7 @@ public class userapprove extends AppCompatActivity {
 
                                                   }
                                               });
+
                                               save.setOnClickListener(new View.OnClickListener() {
                                                   @Override
                                                   public void onClick(View v) {
@@ -180,6 +193,7 @@ public class userapprove extends AppCompatActivity {
                 ).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                loadingDialog.dismissDialog();
                 Toast.makeText(userapprove.this, "Failed to read database. Contact support", Toast.LENGTH_SHORT).show();
             }
         });

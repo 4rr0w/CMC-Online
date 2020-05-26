@@ -52,21 +52,19 @@
             android:textSize="22sp"
             android:textColor="#fff"
             android:padding="2dp"
-            android:layout_marginLeft="20dp"
             android:text="FULL NAME"
-            android:layout_marginStart="20dp" />
+            />
 
         <TextView
             android:id="@+id/Unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="30dp"
             android:textSize="15sp"
             android:textColor="#fff"
             android:padding="2dp"
-            android:layout_marginLeft="20dp"
             android:text="UNIT"
-            android:layout_marginStart="20dp" />
+             />
         <TextView
             android:id="@+id/Label"
             android:layout_width="wrap_content"
@@ -74,8 +72,8 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:textColor="#fff"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="120dp"
             android:text="Label" />
 
         <Button

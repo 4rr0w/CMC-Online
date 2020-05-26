@@ -37,8 +37,8 @@ public class login extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseFirestore db2 = FirebaseFirestore.getInstance();
     public static int type = 0;
-    public static int stop = 0;
-
+    public static String unit_;
+    LoadingDialog loadingDialog = new LoadingDialog((login.this));
 
     //a constant for detecting the login intent result
     private static final int RC_SIGN_IN = 234;
@@ -64,6 +64,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if (fields()) {
+                    loadingDialog.startLoadingDialog();
 
                     validate(phone.getText().toString(), password.getText().toString());
                 }
@@ -104,8 +105,9 @@ public class login extends AppCompatActivity {
         //we will close this activity
         //and take the user to profile activity
         if ((mAuth.getCurrentUser() != null)) {
-            progress = new ProgressDialog(login.this);//progression bar
 
+
+            loadingDialog.startLoadingDialog();
             log();
 
 
@@ -158,6 +160,7 @@ public class login extends AppCompatActivity {
         db.collection("users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
                 if(task.getResult().exists()){
                     Intent intent = new Intent(login.this, profile.class);//creating a new intent pointing to Profile
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -169,10 +172,11 @@ public class login extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentSnapshot d2) {
                             Intent admin;
+                            unit_ = d2.getString("unit");
                             if(d2.get("type")==null){
 
                                 mAuth.signOut();
-
+                                loadingDialog.dismissDialog();
                                 return;
                             }
                             type = (int) (long)d2.get("approved");
@@ -185,6 +189,7 @@ public class login extends AppCompatActivity {
 
 
                             }
+                            loadingDialog.dismissDialog();
                             startActivity(admin);
                             finish();
 

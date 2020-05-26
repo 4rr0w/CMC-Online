@@ -25,16 +25,15 @@ public class profile extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String id = mAuth.getUid();
 
-    TextView name,unit,zone,location,departing,arriving,movstatus,medtstatus,phone,movremark,medremark;
+    TextView name,unit,zone,location,departing,arriving,movstatus,medtstatus,phone,movremark,medremark,totalpeople;
     Button logout;
     String[] approve;
-    loading loadingdialog;
+    LoadingDialog loadingDialog = new LoadingDialog((profile.this));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        loadingdialog = new loading(profile.this);
+        loadingDialog.startLoadingDialog();
 
         name = findViewById(R.id.name);
         unit = findViewById(R.id.unit);
@@ -50,6 +49,7 @@ public class profile extends AppCompatActivity {
         medremark = findViewById(R.id.medremark);
         location = findViewById(R.id.location);
         logout = findViewById(R.id.logout);
+        totalpeople = findViewById(R.id.totalpeople);
 
         approve = getResources().getStringArray(R.array.status);
 
@@ -84,6 +84,7 @@ public class profile extends AppCompatActivity {
                                             medremark.setText("Medical Remark : "+d.getString("Remark"));
                                             location.setText(d.getString("location"));
                                             phone.setText("+91 "+d.getString("phone"));
+                                            totalpeople.setText("Number of person : " + (String)d.get("people").toString());
 
 
                                           }
@@ -96,7 +97,7 @@ public class profile extends AppCompatActivity {
             }
         });
 
-
+        loadingDialog.dismissDialog();
 
     }
 
