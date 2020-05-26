@@ -27,15 +27,14 @@ public class profile extends AppCompatActivity {
 
     TextView name,unit,zone,location,departing,arriving,movstatus,medtstatus,phone,movremark,medremark;
     Button logout;
-
-
+    String[] approve;
+    loading loadingdialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        final loading loadingdialog = new loading(profile.this);
-        loadingdialog.startLoadingDialog();
+        loadingdialog = new loading(profile.this);
 
         name = findViewById(R.id.name);
         unit = findViewById(R.id.unit);
@@ -51,6 +50,9 @@ public class profile extends AppCompatActivity {
         medremark = findViewById(R.id.medremark);
         location = findViewById(R.id.location);
         logout = findViewById(R.id.logout);
+
+        approve = getResources().getStringArray(R.array.status);
+
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,13 +78,13 @@ public class profile extends AppCompatActivity {
                                             zone.setText("Containment Zone : "+d.getString("zone"));
                                             departing.setText("Departure Date : " + d.getString("DepartureDate"));
                                             arriving.setText("Expected Arrival : " +d.getString( "ExpectedArrival"));
-                                            movstatus.setText(d.getString("Motion Approved"));
-                                            medtstatus.setText(d.getString("Medically Approved"));
+                                            movstatus.setText(approve[(int) (long) d.get("movement")]);
+                                            medtstatus.setText(approve[(int) (long) d.get("final")]);
                                             movremark.setText("Movement Remark : " +d.getString("movRemark"));
                                             medremark.setText("Medical Remark : "+d.getString("Remark"));
                                             location.setText(d.getString("location"));
                                             phone.setText("+91 "+d.getString("phone"));
-                                            loadingdialog.dismissDialog();
+
 
                                           }
                                       }

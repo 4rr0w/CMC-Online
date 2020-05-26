@@ -180,7 +180,7 @@
                         android:gravity="center"
                         android:layout_marginLeft="5dp"
                         android:spinnerMode="dropdown"
-                        android:text="hello"
+
                         />
 
 
@@ -218,7 +218,7 @@
                         android:gravity="center"
                         android:layout_marginLeft="5dp"
                         android:spinnerMode="dropdown"
-                        android:text="hello"
+
                         />
 
 

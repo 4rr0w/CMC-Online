@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/SensibleDefaultsMaterialCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorDark"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_margin="8dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/depdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:text="Departure\n01/01/19"
+                 />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/arrdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="10dp"
+            android:text="Expected Arrival\n01/01/19"
+
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="110dp"
+            />
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="160dp"
+            android:text="FULL NAME"
+            />
+        <TextView
+            android:id="@+id/unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:layout_marginTop="42dp"
+            android:layout_marginLeft="160dp"
+            android:text="Unit : "
+        />
+        <TextView
+            android:id="@+id/zone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:layout_marginTop="62dp"
+            android:layout_marginLeft="160dp"
+            android:text="Zone : "
+            />
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

@@ -176,7 +176,6 @@ public class signup extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final loading loadingdialog = new loading(signup.this);
-                loadingdialog.startLoadingDialog();
                 try {
                     InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -228,7 +227,7 @@ public class signup extends AppCompatActivity {
                 }
 
                 if (unit_str.equalsIgnoreCase("(Select Your Unit)")) {
-                    ((TextView)zone.getSelectedView()).setError("This field is required!");
+                    ((TextView)unit.getSelectedView()).setError("This field is required!");
                     is_valid =false;
                 }
 
@@ -242,7 +241,7 @@ public class signup extends AppCompatActivity {
                     password.setError("Minimun length should be 6");
                     is_valid =false;
                 }
-                loadingdialog.dismissDialog();
+
                 if (is_valid){
 
                     firstname = fname.getText().toString();

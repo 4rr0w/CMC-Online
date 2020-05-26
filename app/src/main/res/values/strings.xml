@@ -16,12 +16,20 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="instant_validation">(instant validation)</string>
+    <string name="crisis_management_cell_nonline">Crisis Management Cell\nOnline</string>
 
     <string-array name="zones">
         <item> (Select Containment Zone) </item>
         <item> Green Zone</item>
         <item> Orange Zone</item>
         <item> Red Zone</item>
+
+    </string-array>
+
+    <string-array name="type">
+        <item> (Select Admin Type) </item>
+        <item> Admin </item>
+        <item> Medical </item>
 
     </string-array>
 
@@ -32,6 +40,17 @@
         <item> AFS Sohna Road </item>
         <item> AFS New Delhi </item>
         <item> Other </item>
+    </string-array>
 
+    <string-array name="approves">
+        <item>Pending</item>
+        <item>Approve</item>
+        <item>Decline</item>
+    </string-array>
+
+    <string-array name="status">
+        <item>Pending</item>
+        <item>Approved</item>
+        <item>Declined</item>
     </string-array>
 </resources>

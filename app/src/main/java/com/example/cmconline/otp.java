@@ -280,10 +280,11 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                                                 userdetails.put("zone",signup.zone_str);
                                                 userdetails.put("unit",signup.unit_str);
                                                 userdetails.put("location",signup.loc);
-                                                userdetails.put("Motion Approved","Pending");
-                                                userdetails.put("Medically Approved","Pending");
+                                                userdetails.put("movement",(int)0);
+                                                userdetails.put("final",(int)0);
                                                 userdetails.put("Remark","None");
                                                 userdetails.put("movRemark","None");
+                                                userdetails.put("type",(int)0);
 
                                                 db.collection("users").document(mAuth.getUid())
                                                         .set(userdetails);
@@ -298,6 +299,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                                             } else {
 
                                                 if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                                    mAuth.signOut();
                                                     Toast.makeText(getApplicationContext(), "You are already registered!", Toast.LENGTH_SHORT).show();
                                                 } else {
                                                     Toast.makeText(otp.this, Objects.requireNonNull(task.getException()).getMessage(),

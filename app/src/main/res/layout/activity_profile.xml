@@ -14,12 +14,12 @@
         <Button
             android:id="@+id/logout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginRight="10dp"
             android:text="Log Out"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_white"
-            android:textSize="10dp"
+            android:textSize="12dp"
+            android:background="@drawable/button_transparent"
 
             />
         <LinearLayout
@@ -133,7 +133,7 @@
                         android:padding="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Medical Status"
+                        android:text="Final Approve"
                         android:textSize="18sp"
                         />
                     <TextView

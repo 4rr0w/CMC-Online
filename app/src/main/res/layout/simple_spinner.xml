@@ -5,9 +5,11 @@
     style="@style/spinnerItemStyle"
     android:singleLine="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textColor="#fff"
+    android:layout_height="30dp"
+    android:textColor="#000"
+    android:background="#c0c0c0"
     android:ellipsize="marquee"
     android:paddingLeft="2dp"
-
-    />
+    android:textAlignment="center"
+    android:gravity="center_horizontal"
+    android:padding="3dp"/>
