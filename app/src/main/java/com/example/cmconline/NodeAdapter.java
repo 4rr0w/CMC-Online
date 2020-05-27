@@ -1,11 +1,13 @@
 package com.example.cmconline;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -28,7 +30,20 @@ public class NodeAdapter extends FirestoreRecyclerAdapter<Userslist,NodeAdapter.
         nodeHolder.exp.setText("Expected Arrival\n"+userslist.getExpectedArrival());
         nodeHolder.name.setText(userslist.getFirst()+" "+(userslist.getLast()));
         nodeHolder.unit.setText("Unit : "+userslist.getUnit());
-        nodeHolder.zone.setText("Zone : "+userslist.getZone());
+        nodeHolder.zone.setText("People : "+userslist.getPeople());
+
+        if (userslist.getZone().equals("Green Zone"))
+        {
+            nodeHolder.cardView.setBackgroundColor(Color.parseColor("#006400"));
+        }
+        if (userslist.getZone().equals("Orange Zone"))
+        {
+            nodeHolder.cardView.setBackgroundColor(Color.parseColor("#FD6A02"));
+        }
+        if (userslist.getZone().equals("Red Zone"))
+        {
+            nodeHolder.cardView.setBackgroundColor(Color.parseColor("#FF0000"));
+        }
 
     }
 
@@ -44,6 +59,7 @@ public class NodeAdapter extends FirestoreRecyclerAdapter<Userslist,NodeAdapter.
     class NodeHolder extends RecyclerView.ViewHolder{
 
         TextView dep,exp,name,unit,zone;
+        CardView cardView;
 
         public NodeHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,7 +68,8 @@ public class NodeAdapter extends FirestoreRecyclerAdapter<Userslist,NodeAdapter.
             exp = itemView.findViewById(R.id.arrdate);
             name = itemView.findViewById(R.id.name);
             unit = itemView.findViewById(R.id.unit);
-            zone = itemView.findViewById(R.id.zone);
+            zone = itemView.findViewById(R.id.people);
+            cardView = itemView.findViewById(R.id.card);
 
             itemView.setOnClickListener(new View.OnClickListener(){
 

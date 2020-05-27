@@ -100,10 +100,10 @@ public class admin extends AppCompatActivity  {
         CollectionReference dbref = db2.collection("users");
         Query query;
         if (usertype != 3) {
-             query = dbref.whereEqualTo("unit", unit_);
+             query = dbref.whereEqualTo("unit", unit_).orderBy("movement").orderBy("final");
         }
         else{
-            query = dbref;
+            query = dbref.orderBy("movement").orderBy("final");
         }
 
 
