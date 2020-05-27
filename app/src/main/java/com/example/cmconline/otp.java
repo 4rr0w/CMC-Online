@@ -287,6 +287,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                                                 userdetails.put("type",(int)0);
                                                 userdetails.put("people",signup.people);
 
+
                                                 db.collection("users").document(mAuth.getUid())
                                                         .set(userdetails);
 

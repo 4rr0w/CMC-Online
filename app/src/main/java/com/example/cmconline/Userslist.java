@@ -8,7 +8,7 @@ public class Userslist {
     private String first;
     private String last;
 
-    private int people;
+    private String people;
     private String unit;
     private String zone;
 
@@ -31,7 +31,7 @@ public class Userslist {
     }
 
     public String getPeople() {
-        return String.valueOf(people);
+        return people;
     }
 
     public String getUnit() {
@@ -42,10 +42,10 @@ public class Userslist {
         return zone;
     }
 
-    public Userslist(String departureDate, String expectedArrival, String mea, String moa, String remark, String first, String last, String loc, String moremark, String phone, String unit, String zone, int peoples) {
+    public Userslist(String departureDate, String expectedArrival, String mea, String moa, String remark, String first, String last, String loc, String moremark, String phone, String unit, String zone,String  people) {
         DepartureDate = departureDate;
         ExpectedArrival = expectedArrival;
-        this.people = peoples;
+        this.people = people;
         this.first = first;
         this.last = last;
         this.unit = unit;

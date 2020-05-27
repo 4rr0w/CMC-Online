@@ -30,7 +30,7 @@ public class NodeAdapter extends FirestoreRecyclerAdapter<Userslist,NodeAdapter.
         nodeHolder.exp.setText("Expected Arrival\n"+userslist.getExpectedArrival());
         nodeHolder.name.setText(userslist.getFirst()+" "+(userslist.getLast()));
         nodeHolder.unit.setText("Unit : "+userslist.getUnit());
-        nodeHolder.zone.setText("People : "+userslist.getPeople());
+        nodeHolder.zone.setText("People : "+ userslist.getPeople());
 
         if (userslist.getZone().equals("Green Zone"))
         {

@@ -155,14 +155,13 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorWhite"
                     android:hint="Number of people (Including Self)"
-                    android:maxLength="1"
                     android:imeOptions="actionNext"
                     android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
                     android:textColor="@color/colorWhite"
                     android:textColorHint="@color/colorHint"
-                    android:textSize="16sp"
-                    android:maxLines="1"
-                    />
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
