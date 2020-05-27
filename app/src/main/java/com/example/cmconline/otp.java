@@ -88,6 +88,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         phonenumber = "+91"+ signup.phonenumber;
         mPhoneNumberField = findViewById(R.id.fieldPhoneNumber);
         mPhoneNumberField.setText(phonenumber);
+        mPhoneNumberField.setEnabled(false);
         mVerificationField = findViewById(R.id.fieldVerificationCode);
 
         mStartButton = findViewById(R.id.buttonStart);
@@ -149,7 +150,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                 } else if (e instanceof FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
                     // [START_EXCLUDE]
-                    Snackbar.make(findViewById(android.R.id.content), "Quota exceeded.",
+                    Snackbar.make(findViewById(android.R.id.content), "Quota for OTP exceeded.",
                             Snackbar.LENGTH_SHORT).show();
                     // [END_EXCLUDE]
                 }
@@ -159,6 +160,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
 
                 // [END_EXCLUDE]
             }
+
 
             @Override
             public void onCodeSent(@NonNull String verificationId,
@@ -190,9 +192,6 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-
-        // [START_EXCLUDE]
-
         if (mVerificationInProgress && validatePhoneNumber()) {
             startPhoneNumberVerification(mPhoneNumberField.getText().toString());
         }
@@ -216,6 +215,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
 
     private void startPhoneNumberVerification(String phoneNumber) {
         // [START start_phone_auth]
+        mStartButton.setEnabled(false);
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify
                 60,                 // Timeout duration
@@ -228,6 +228,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void verifyPhoneNumberWithCode(String verificationId, String code) {
+
         // [START verify_with_code]
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
         // [END verify_with_code]
@@ -249,6 +250,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
 
     // [START sign_in_with_phone]
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -396,5 +398,13 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                 break;
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent login = new Intent(otp.this,login.class);
+        startActivity(login);
+        finish();
     }
 }

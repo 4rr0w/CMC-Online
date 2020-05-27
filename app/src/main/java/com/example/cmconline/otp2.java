@@ -87,6 +87,7 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
         phonenumber = "+91"+ adminlogin.phonenumber;
         mPhoneNumberField = findViewById(R.id.fieldPhoneNumber);
         mPhoneNumberField.setText(phonenumber);
+        mPhoneNumberField.setEnabled(false);
         mVerificationField = findViewById(R.id.fieldVerificationCode);
 
         mStartButton = findViewById(R.id.buttonStart);
@@ -148,7 +149,7 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
                 } else if (e instanceof FirebaseTooManyRequestsException) {
                     // The SMS quota for the project has been exceeded
                     // [START_EXCLUDE]
-                    Snackbar.make(findViewById(android.R.id.content), "Quota exceeded.",
+                    Snackbar.make(findViewById(android.R.id.content), "Quota for OTP exceeded.",
                             Snackbar.LENGTH_SHORT).show();
                     // [END_EXCLUDE]
                 }
@@ -214,6 +215,7 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
 
 
     private void startPhoneNumberVerification(String phoneNumber) {
+        mStartButton.setEnabled(false);
         // [START start_phone_auth]
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify
@@ -248,6 +250,7 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
 
     // [START sign_in_with_phone]
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mStartButton.setEnabled(false);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -386,5 +389,12 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
                 break;
 
         }
+    }
+    @Override
+    public void onBackPressed() {
+
+        Intent login = new Intent(otp2.this,login.class);
+        startActivity(login);
+        finish();
     }
 }
