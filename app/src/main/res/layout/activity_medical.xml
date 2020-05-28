@@ -40,14 +40,15 @@
 
             <TextView
                 android:id="@+id/name"
-                android:layout_marginTop="25dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:fontFamily="serif-monospace"
                 android:text="Name Here"
                 android:textColor="#fff"
-                android:textStyle="bold"
-                android:textSize="28sp"/>
+                android:textSize="28sp"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/unit"
                 android:layout_marginTop="5dp"
@@ -57,7 +58,7 @@
                 android:text="Unit"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/zone"
                 android:layout_marginTop="5dp"
@@ -67,7 +68,7 @@
                 android:text="Zone"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/departing"
                 android:layout_marginTop="5dp"
@@ -77,7 +78,7 @@
                 android:text="departing on"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/arriving"
                 android:layout_marginTop="5dp"
@@ -87,7 +88,7 @@
                 android:text="Arriving on"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
             <TextView
                 android:id="@+id/totalpeople"
                 android:layout_marginTop="5dp"
@@ -97,7 +98,7 @@
                 android:text="Arriving on"
                 android:textColor="#fff"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="16sp"/>
 
 
 
