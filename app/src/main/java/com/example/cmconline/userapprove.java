@@ -112,7 +112,7 @@ public class userapprove extends AppCompatActivity {
 
 
 
-                                              ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(userapprove.this,R.array.approves,R.layout.simple_spinner);
+                                              ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(userapprove.this,R.array.approves,R.layout.simple_spinner1);
                                               adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                                               istapprove.setAdapter(adapter);
                                               istapprove.setSelection(sp1);
@@ -138,7 +138,7 @@ public class userapprove extends AppCompatActivity {
                                                   }
                                               });
 
-                                              ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(userapprove.this,R.array.approves,R.layout.simple_spinner);
+                                              ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(userapprove.this,R.array.approves,R.layout.simple_spinner1);
                                               adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
                                               finalapprove.setAdapter(adapter2);
                                               finalapprove.setSelection(sp2);

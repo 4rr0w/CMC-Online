@@ -25,6 +25,13 @@
         <item> Red Zone</item>
 
     </string-array>
+    <string-array name="zonefilter">
+        <item> Zones </item>
+        <item> Green Zone</item>
+        <item> Orange Zone</item>
+        <item> Red Zone</item>
+
+    </string-array>
 
     <string-array name="type">
         <item> (Select Admin Type) </item>
@@ -39,6 +46,8 @@
         <item> AFS Palam </item>
         <item> AFS Sohna Road </item>
         <item> AFS New Delhi </item>
+
+
         <item> Other </item>
     </string-array>
 
@@ -47,6 +56,27 @@
         <item>Approve</item>
         <item>Decline</item>
     </string-array>
+
+    <string-array name="people">
+        <item>People</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
+    <string-array name="stat">
+        <item>All</item>
+        <item>Pending</item>
+        <item>Approved</item>
+        <item>Declined</item>
+    </string-array>
+
 
     <string-array name="status">
         <item>Pending</item>

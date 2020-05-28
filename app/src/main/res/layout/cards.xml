@@ -51,22 +51,23 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:src="@drawable/vertical"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="110dp"
+            android:layout_marginLeft="145dp"
             />
+
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
-            android:maxLines="1"
-            android:textColor="#fff"
-            android:layout_marginTop="2dp"
             android:layout_marginLeft="160dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="monospace"
+            android:maxLines="1"
             android:text="FULL NAME"
-            />
+            android:textColor="#fff"
+            android:textSize="22sp" />
         <TextView
             android:id="@+id/unit"
             android:layout_width="wrap_content"

@@ -1,30 +1,33 @@
 package com.example.cmconline;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import static com.example.cmconline.login.unit_;
 
 public class admin extends AppCompatActivity  {
 
@@ -33,10 +36,12 @@ public class admin extends AppCompatActivity  {
     private NodeAdapter adapter;
     public static String snapid;
     TextView name,unit,label;
-    public String unit_str;
     public int usertype;
     Button logout;
+    String unitstr;
     LoadingDialog loadingDialog = new LoadingDialog((admin.this));
+    Spinner mov,fin,zonespinner,pspinner;
+    RelativeLayout disabled;
 
 
     @Override
@@ -49,10 +54,16 @@ public class admin extends AppCompatActivity  {
         db = FirebaseFirestore.getInstance();
         db2 = FirebaseFirestore.getInstance();
 
+
         name = findViewById(R.id.Name);
         unit = findViewById(R.id.Unit);
         label = findViewById(R.id.Label);
         logout = findViewById(R.id.logoutad);
+        mov = findViewById(R.id.filtermov);
+        fin = findViewById(R.id.filterfinal);
+        zonespinner = findViewById(R.id.filterzone);
+        pspinner = findViewById(R.id.filterpeople);
+        disabled =findViewById(R.id.backfilter);
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +76,141 @@ public class admin extends AppCompatActivity  {
             }
         });
 
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.stat,R.layout.simple_spinner);
+        adapter1.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        mov.setAdapter(adapter1);
+        mov.setSelection(0);
+        mov.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+
+                if(parent.getItemAtPosition(position).toString().equals("Pending") | parent.getItemAtPosition(position).toString().equals("Declined")  ){
+
+                    fin.setSelection(0);
+                    fin.setEnabled(false);
+
+                }
+                else {
+                    fin.setEnabled(true);
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.stat,R.layout.simple_spinner);
+        adapter2.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        fin.setAdapter(adapter2);
+        fin.setSelection(0);
+        fin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.people,R.layout.simple_spinner);
+        adapter3.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        pspinner.setAdapter(adapter3);
+        pspinner.setSelection(0);
+        pspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,R.array.zonefilter,R.layout.simple_spinner);
+        adapter4.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        zonespinner.setAdapter(adapter4);
+        zonespinner.setSelection(0);
+        zonespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        db.collection("admin").document(mAuth.getUid()).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                          @Override
+                                          public void onSuccess(DocumentSnapshot d) {
+
+
+                                              unitstr = d.getString("unit");
+                                              usertype = (int)(long)d.get("type");
+                                              name.setText(d.getString("first")+" "+d.getString("last"));
+                                              unit.setText(unitstr);
+
+                                              if(usertype==1|usertype==3){
+                                                  label.setText("Approving Officer");
+                                                  if(usertype==3){label.setText("Approving Officer*");
+
+                                                  }
+
+                                              }
+                                              if(usertype==2 ){
+                                                  label.setText("Medical Officer");
+
+                                              }
+
+
+
+
+                                          }
+                                      }
+
+                ).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(admin.this, "Failed to read database. Contact support", Toast.LENGTH_SHORT).show();
+            }
+        });
         setRecycler();
 
         adapter.setOnItemClickListner(new NodeAdapter.OnItemClickListner() {
@@ -92,19 +238,19 @@ public class admin extends AppCompatActivity  {
 
 
 
+
     }
 
     private void setRecycler(){
         loadingDialog.startLoadingDialog();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        unitstr = pref.getString("unit",null);
 
         CollectionReference dbref = db2.collection("users");
         Query query;
-        if (usertype != 3) {
-             query = dbref.whereEqualTo("unit", unit_);
-        }
-        else{
-            query = dbref.orderBy("movement");
-        }
+
+        query = dbref.whereEqualTo("unit",unitstr);
+
 
 
         FirestoreRecyclerOptions<Userslist> options = new FirestoreRecyclerOptions.Builder<Userslist>()
@@ -117,7 +263,6 @@ public class admin extends AppCompatActivity  {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         loadingDialog.dismissDialog();
-
     }
 
 
@@ -125,40 +270,6 @@ public class admin extends AppCompatActivity  {
     protected void onStart(){
         loadingDialog.startLoadingDialog();
         super.onStart();
-        db.collection("admin").document(mAuth.getUid()).get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                          @Override
-                                          public void onSuccess(DocumentSnapshot d) {
-                                              unit_str = d.getString("unit");
-                                              usertype = (int)(long)d.get("type");
-                                              name.setText(d.getString("first")+" "+d.getString("last"));
-                                              unit.setText("Unit : " + unit_str);
-
-                                              if(usertype==1|usertype==3){
-                                                  label.setText("Approving Officer");
-                                                  if(usertype==3){label.setText("Approving Officer*");
-
-                                                  }
-
-                                              }
-                                              if(usertype==2 ){
-                                                  label.setText("Medical Officer");
-
-                                              }
-
-
-
-
-                                          }
-                                      }
-
-                ).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(admin.this, "Failed to read database. Contact support", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         adapter.startListening();
         loadingDialog.dismissDialog();
     }

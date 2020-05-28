@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -106,7 +107,6 @@ public class login extends AppCompatActivity {
         //and take the user to profile activity
         if ((mAuth.getCurrentUser() != null)) {
 
-
             loadingDialog.startLoadingDialog();
             log();
 
@@ -173,12 +173,20 @@ public class login extends AppCompatActivity {
                         public void onSuccess(DocumentSnapshot d2) {
                             Intent admin;
                             unit_ = d2.getString("unit");
+
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("unit",unit_);
+                            editor.apply();
+
+
                             if(d2.get("type")==null){
 
                                 mAuth.signOut();
                                 loadingDialog.dismissDialog();
                                 return;
                             }
+
                             type = (int) (long)d2.get("approved");
                             switch(type){
                                 case 0 : admin = new Intent(login.this,waiting.class);
@@ -213,3 +221,6 @@ public class login extends AppCompatActivity {
 
 
 }
+
+
+

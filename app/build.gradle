@@ -6,20 +6,27 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
+
         applicationId "com.example.cmconline"
         multiDexEnabled true
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        //strip other than english resources
+        resConfigs "en"//strip other than english resources
+        resConfigs "en"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            shrinkResources true
+
+
         }
     }
 
@@ -36,14 +43,9 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.firebaseui:firebase-ui-database:4.3.2'
     implementation 'com.firebaseui:firebase-ui-firestore:6.2.1'
+    implementation 'com.firebaseui:firebase-ui-database:6.2.1'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
     implementation 'com.google.firebase:firebase-auth:19.3.1'
-    //the core iconcis library (without any widgets)
-    implementation "com.mikepenz:iconics-core:2.9.0@aar"
-    implementation 'com.mikepenz:fontawesome-typeface:5.3.1.1@aar'
-    //implementation "com.mikepenz:iconics-views:2.9.5"
-    implementation 'com.mikepenz:iconics-views:2.9.0@aar'
 
 }
