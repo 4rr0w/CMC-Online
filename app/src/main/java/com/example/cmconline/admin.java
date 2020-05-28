@@ -28,6 +28,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.Arrays;
+
 
 public class admin extends AppCompatActivity  {
 
@@ -37,11 +39,14 @@ public class admin extends AppCompatActivity  {
     public static String snapid;
     TextView name,unit,label;
     public int usertype;
-    Button logout;
     String unitstr;
+    Button logout;
     LoadingDialog loadingDialog = new LoadingDialog((admin.this));
     Spinner mov,fin,zonespinner,pspinner;
     RelativeLayout disabled;
+    int movfiter = 0,finalfilter=0;
+    String zonefilter = "Zones",peoplefilter="People";
+
 
 
     @Override
@@ -61,9 +66,21 @@ public class admin extends AppCompatActivity  {
         logout = findViewById(R.id.logoutad);
         mov = findViewById(R.id.filtermov);
         fin = findViewById(R.id.filterfinal);
+
         zonespinner = findViewById(R.id.filterzone);
         pspinner = findViewById(R.id.filterpeople);
         disabled =findViewById(R.id.backfilter);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+        unitstr = pref.getString("unit",null);
+        CollectionReference dbref = db2.collection("users");
+        Query queryinit = dbref.whereEqualTo("unit",unitstr);
+
+
+
+
+
+
 
 
         logout.setOnClickListener(new View.OnClickListener() {
@@ -90,16 +107,21 @@ public class admin extends AppCompatActivity  {
                     // TODO: handle exception
                 }
 
-                if(parent.getItemAtPosition(position).toString().equals("Pending") | parent.getItemAtPosition(position).toString().equals("Declined")  ){
+                if(position == 1 | position == 3 ){
 
                     fin.setSelection(0);
                     fin.setEnabled(false);
+
 
                 }
                 else {
                     fin.setEnabled(true);
 
                 }
+
+                movfiter = position;
+                queryMaker();
+
             }
 
             @Override
@@ -121,6 +143,10 @@ public class admin extends AppCompatActivity  {
                 } catch (Exception e) {
                     // TODO: handle exception
                 }
+
+                finalfilter = position;
+                queryMaker();
+
 
             }
 
@@ -145,6 +171,9 @@ public class admin extends AppCompatActivity  {
                     // TODO: handle exception
                 }
 
+                zonefilter = parent.getItemAtPosition(position).toString();
+                queryMaker();
+
             }
 
             @Override
@@ -166,7 +195,8 @@ public class admin extends AppCompatActivity  {
                 } catch (Exception e) {
                     // TODO: handle exception
                 }
-
+                peoplefilter = parent.getItemAtPosition(position).toString();
+                queryMaker();
             }
 
             @Override
@@ -211,8 +241,9 @@ public class admin extends AppCompatActivity  {
                 Toast.makeText(admin.this, "Failed to read database. Contact support", Toast.LENGTH_SHORT).show();
             }
         });
-        setRecycler();
 
+
+        setRecycler(queryinit);
         adapter.setOnItemClickListner(new NodeAdapter.OnItemClickListner() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
@@ -239,20 +270,89 @@ public class admin extends AppCompatActivity  {
 
 
 
+
+
     }
 
-    private void setRecycler(){
+
+    private void queryMaker(){
+
+        Query query = db2.collection("users").whereEqualTo("unit",unitstr);
+
+            if (movfiter == 0 & finalfilter != 0 ){
+
+
+                if (!zonefilter.equals("Zones")){
+                    query = query.whereEqualTo("final",finalfilter - 1).whereEqualTo("zone", zonefilter);
+                }else{
+                    query = query.whereEqualTo("final",finalfilter - 1);
+                }
+
+            }
+            else if (finalfilter != 0 & movfiter != 0 ){
+
+
+                if (!zonefilter.equals("Zones")){
+                    query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1).whereEqualTo("zone", zonefilter);
+                }else{
+                    query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1);
+                }
+
+            }
+            else if (movfiter != 0 & finalfilter == 0){
+                Toast.makeText(this, zonefilter, Toast.LENGTH_SHORT).show();
+
+
+                if (!zonefilter.equals("Zones")){
+                    query = query.whereEqualTo("movement", movfiter-1).whereEqualTo("zone", zonefilter);
+                }else{
+                    query = query.whereEqualTo("movement", movfiter-1);
+                }
+
+            }
+
+
+
+//            if (!peoplefilter.equals("People")){
+//                query = query.whereEqualTo("people", peoplefilter);
+//            }
+
+
+
+
+
+
+
+
+        setRecycler(query);
+        adapter.startListening();
+        adapter.setOnItemClickListner(new NodeAdapter.OnItemClickListner() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+
+                snapid = documentSnapshot.getId();
+                if(usertype == 1) {
+                    Intent approve = new Intent(admin.this, userapprove.class);
+                    startActivity(approve);
+                    loadingDialog.dismissDialog();
+                    finish();
+                }
+                if(usertype == 2){
+                    Intent medical = new Intent(admin.this, medical.class);
+                    startActivity(medical);
+                    finish();
+                }
+
+
+
+
+            }
+        });
+
+    }
+
+    private void setRecycler(Query query){
         loadingDialog.startLoadingDialog();
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-        unitstr = pref.getString("unit",null);
-
-        CollectionReference dbref = db2.collection("users");
-        Query query;
-
-        query = dbref.whereEqualTo("unit",unitstr);
-
-
-
         FirestoreRecyclerOptions<Userslist> options = new FirestoreRecyclerOptions.Builder<Userslist>()
                 .setQuery(query,Userslist.class)
                 .build();
