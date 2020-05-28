@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 public class signup extends AppCompatActivity {
     DatePickerDialog picker;
     DatabaseReference dref;
-    public static EditText fname, lname, phone, departure, expctedarrival ,password, location,numpeople;
+    public static EditText fname, lname, phone, departure, expctedarrival ,password,password2, location,numpeople;
     Spinner zone, unit;
     public static String zone_str, unit_str, firstname, lastname, phonenumber,depdate,exparrdate,loc,pass,people;
 
@@ -69,6 +69,7 @@ public class signup extends AppCompatActivity {
         departure = findViewById(R.id.tvdep);
         expctedarrival = findViewById(R.id.tvarrival);
         password = findViewById(R.id.tvpassword);
+        password2 = findViewById(R.id.tvpassword2);
         zone = findViewById(R.id.tvzone);
         unit = findViewById(R.id.tvunit);
         signup = findViewById(R.id.btsignup);
@@ -229,6 +230,11 @@ public class signup extends AppCompatActivity {
 
                 if (password.getText().toString().trim().equalsIgnoreCase("")) {
                     password.setError("This field can not be blank");
+                    is_valid =false;
+                }
+
+                if (!password.getText().toString().trim().equals("password.getText().toString().trim()")) {
+                    password.setError("Passwords should match!");
                     is_valid =false;
                 }
 

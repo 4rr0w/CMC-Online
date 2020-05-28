@@ -254,11 +254,37 @@
 
                     />
 
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnpassword2"
+                android:layout_below="@id/lnpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/tvpassword2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Retype Password"
+                android:imeOptions="actionNext"
+                android:backgroundTint="@color/colorWhite"
+                android:inputType="textPassword"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorHint"
+                android:textSize="16sp"
+                android:maxLines="1"
+
+                />
             </LinearLayout>
 
             <Button
                 android:id="@+id/btsignup"
-                android:layout_below="@id/lnpassword"
+                android:layout_below="@id/lnpassword2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -268,6 +294,7 @@
                 android:textAllCaps="false"
 
                 android:textSize="18sp" />
+
 
 
 

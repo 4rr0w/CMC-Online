@@ -171,7 +171,7 @@ public class admin extends AppCompatActivity  {
                     // TODO: handle exception
                 }
 
-                zonefilter = parent.getItemAtPosition(position).toString();
+                peoplefilter = parent.getItemAtPosition(position).toString();
                 queryMaker();
 
             }
@@ -195,7 +195,7 @@ public class admin extends AppCompatActivity  {
                 } catch (Exception e) {
                     // TODO: handle exception
                 }
-                peoplefilter = parent.getItemAtPosition(position).toString();
+                zonefilter = parent.getItemAtPosition(position).toString();
                 queryMaker();
             }
 
@@ -283,9 +283,20 @@ public class admin extends AppCompatActivity  {
 
 
                 if (!zonefilter.equals("Zones")){
-                    query = query.whereEqualTo("final",finalfilter - 1).whereEqualTo("zone", zonefilter);
+
+                    if (!peoplefilter.equals("People")){
+                        query = query.whereEqualTo("final",finalfilter - 1).whereEqualTo("zone", zonefilter).whereEqualTo("people", peoplefilter);
+                    }else{
+                        query = query.whereEqualTo("final",finalfilter - 1).whereEqualTo("zone", zonefilter);
+                    }
                 }else{
-                    query = query.whereEqualTo("final",finalfilter - 1);
+
+                    if (!peoplefilter.equals("People")){
+                        query = query.whereEqualTo("final",finalfilter - 1).whereEqualTo("people", peoplefilter);
+                    }
+                    else{
+                        query = query.whereEqualTo("final",finalfilter - 1);
+                    }
                 }
 
             }
@@ -293,29 +304,71 @@ public class admin extends AppCompatActivity  {
 
 
                 if (!zonefilter.equals("Zones")){
-                    query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1).whereEqualTo("zone", zonefilter);
+
+                    if (!peoplefilter.equals("People")){
+                        query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1).whereEqualTo("zone", zonefilter).whereEqualTo("people", peoplefilter);
+                    }
+                    else{
+                        query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1).whereEqualTo("zone", zonefilter);
+                    }
                 }else{
-                    query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1);
+
+                    if (!peoplefilter.equals("People")){
+                        query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1).whereEqualTo("people", peoplefilter);
+                    }else{
+                        query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1);
+
+                    }
                 }
 
             }
             else if (movfiter != 0 & finalfilter == 0){
-                Toast.makeText(this, zonefilter, Toast.LENGTH_SHORT).show();
 
 
                 if (!zonefilter.equals("Zones")){
-                    query = query.whereEqualTo("movement", movfiter-1).whereEqualTo("zone", zonefilter);
+
+                    if (!peoplefilter.equals("People")){
+                        query = query.whereEqualTo("movement", movfiter-1).whereEqualTo("zone", zonefilter).whereEqualTo("people", peoplefilter);
+                    }else{
+                        query = query.whereEqualTo("movement", movfiter-1).whereEqualTo("zone", zonefilter);
+                    }
                 }else{
-                    query = query.whereEqualTo("movement", movfiter-1);
+
+                    if (!peoplefilter.equals("People")){
+                        query = query.whereEqualTo("movement", movfiter-1).whereEqualTo("people", peoplefilter);
+                    }else{
+                        query = query.whereEqualTo("movement", movfiter-1);
+                    }
                 }
+
+            }
+            else if(movfiter ==0 & finalfilter == 0){
+
+
+                if (!zonefilter.equals("Zones")){
+
+                    if (!peoplefilter.equals("People")){
+                        query = query.whereEqualTo("zone", zonefilter).whereEqualTo("people", peoplefilter);
+                    }
+                    else{
+                        query = query.whereEqualTo("zone", zonefilter);
+                    }
+                }else{
+
+                    if (!peoplefilter.equals("People")){
+                        query = query.whereEqualTo("people", peoplefilter);
+                    }
+                }
+
+
 
             }
 
 
 
-//            if (!peoplefilter.equals("People")){
-//                query = query.whereEqualTo("people", peoplefilter);
-//            }
+            if (!peoplefilter.equals("People")){
+                query = query.whereEqualTo("people", peoplefilter);
+            }
 
 
 

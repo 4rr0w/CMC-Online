@@ -127,6 +127,16 @@ public class userapprove extends AppCompatActivity {
                                                       }
 
                                                       sp1 = position;
+                                                      if (position == 1){
+                                                          finalapprove.setEnabled(true);
+                                                      }else if(position == 0){
+                                                          finalapprove.setEnabled(false);
+                                                          finalapprove.setSelection(0);
+                                                      }
+                                                      else if(position ==2){
+                                                          finalapprove.setEnabled(false);
+                                                          finalapprove.setSelection(2);
+                                                      }
 
 
 

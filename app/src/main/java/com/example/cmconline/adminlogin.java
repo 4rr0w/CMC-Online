@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 public class adminlogin extends AppCompatActivity {
 
-    public static EditText fname, lname, phone, password, location;
+    public static EditText fname, lname, phone, password,password2, location;
     Spinner type, unit;
     public static String unit_str, firstname, lastname, phonenumber,loc,pass;
     public static int t;
@@ -62,6 +62,7 @@ public class adminlogin extends AppCompatActivity {
         phone = findViewById(R.id.tvphone);
         location = findViewById(R.id.tvlocation);
         password = findViewById(R.id.tvpassword);
+        password2 = findViewById(R.id.tvpassword2);
         type = findViewById(R.id.tvtype);
         unit = findViewById(R.id.tvunit);
         signup = findViewById(R.id.btsignup);
@@ -155,6 +156,10 @@ public class adminlogin extends AppCompatActivity {
                     is_valid =false;
                 }
 
+                if (!password.getText().toString().trim().equals("password.getText().toString().trim()")) {
+                    password.setError("Passwords should match!");
+                    is_valid =false;
+                }
                 if (location.getText().toString().trim().equalsIgnoreCase("")) {
                     location.setError("This field can not be blank");
                     is_valid =false;
