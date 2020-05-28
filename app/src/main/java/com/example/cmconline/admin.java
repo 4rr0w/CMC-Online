@@ -304,8 +304,8 @@ public class admin extends AppCompatActivity  {
 
 
                 if (!zonefilter.equals("Zones")){
-
                     if (!peoplefilter.equals("People")){
+
                         query = query.whereEqualTo("movement", movfiter -1).whereEqualTo("final", finalfilter-1).whereEqualTo("zone", zonefilter).whereEqualTo("people", peoplefilter);
                     }
                     else{
