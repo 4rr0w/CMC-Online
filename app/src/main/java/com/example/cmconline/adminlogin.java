@@ -156,7 +156,7 @@ public class adminlogin extends AppCompatActivity {
                     is_valid =false;
                 }
 
-                if (!password.getText().toString().trim().equals("password.getText().toString().trim()")) {
+                if (!password.getText().toString().trim().equals(password.getText().toString().trim())) {
                     password.setError("Passwords should match!");
                     is_valid =false;
                 }
