@@ -27,6 +27,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
@@ -129,8 +130,10 @@ public class login extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     log();
                 } else {
+
                     phone.setError("Wrong Username or Password!");
                     Toast.makeText(login.this, "Login Failed!!", Toast.LENGTH_SHORT).show();
+                    loadingDialog.dismissDialog();
 
                 }
 
@@ -167,6 +170,21 @@ public class login extends AppCompatActivity {
                     startActivity(intent);//starting this new intent
                 }
                 else{
+                    db2.collection("admin").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                if(!Objects.requireNonNull(task.getResult()).exists()) {
+                                    mAuth.getCurrentUser().delete();
+                                    Toast.makeText(login.this, "Your Account was Deleted.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+
+                        }
+                    });
 
                     db2.collection("admin").document(mAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
