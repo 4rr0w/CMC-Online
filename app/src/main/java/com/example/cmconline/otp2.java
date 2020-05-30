@@ -256,6 +256,7 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            mAuth.signOut();
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
 
@@ -296,9 +297,10 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
 
 
                                             } else {
+                                                mAuth.signOut();
 
                                                 if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                                    mAuth.signOut();
+
                                                     Toast.makeText(getApplicationContext(), "You are already registered!", Toast.LENGTH_SHORT).show();
                                                 } else {
                                                     Toast.makeText(otp2.this, Objects.requireNonNull(task.getException()).getMessage(),
