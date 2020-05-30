@@ -36,18 +36,7 @@ public class reset extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-        public static boolean isValid()
-        {
-            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
-                    "[a-zA-Z0-9_+&*-]+)*@" +
-                    "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                    "A-Z]{2,7}$";
 
-            Pattern pat = Pattern.compile(emailRegex);
-            if (== null)
-                return false;
-            return pat.matcher().matches();
-        }
 
         sendresetotp.setOnClickListener(new View.OnClickListener() {
             @Override
