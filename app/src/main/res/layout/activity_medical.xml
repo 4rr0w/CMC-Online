@@ -13,9 +13,9 @@
             android:id="@+id/save"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:text="Back"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:textSize="12dp"
             android:background="@drawable/button_transparent"
 
@@ -24,9 +24,9 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="Save"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
             android:textSize="12dp"
             android:background="@drawable/button_transparent"
 
@@ -194,7 +194,7 @@
                 android:layout_height="36dp"
                 android:src="@drawable/docremark"/>
             <EditText
-                android:id="@+id/medremark"
+                android:id="@+id/medremark1"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
                 android:layout_width="match_parent"

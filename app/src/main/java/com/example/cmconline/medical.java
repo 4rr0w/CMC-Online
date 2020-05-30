@@ -43,7 +43,7 @@ public class medical extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_medical);
 
 
 
@@ -58,9 +58,10 @@ public class medical extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         arriving = findViewById(R.id.arriving);
         movremark = findViewById(R.id.movremark);
-        remark = findViewById(R.id.medremark);
+        remark = findViewById(R.id.medremark1);
         location = findViewById(R.id.location);
         save = findViewById(R.id.save);
+        back = findViewById(R.id.back);
         totalpeople = findViewById(R.id.totalpeople);
 
         approve = getResources().getStringArray(R.array.status);

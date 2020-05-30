@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CMC Online.iml" filepath="$PROJECT_DIR$/CMC Online.iml" group="CMC Online" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CMC_Online.iml" filepath="$PROJECT_DIR$/.idea/modules/CMC_Online.iml" group="CMC_Online" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="CMC Online/app" />
     </modules>
   </component>
