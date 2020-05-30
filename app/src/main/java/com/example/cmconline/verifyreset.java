@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -33,7 +34,9 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,13 +64,14 @@ public class verifyreset extends AppCompatActivity implements View.OnClickListen
 
 
     private boolean mVerificationInProgress = false;
-    private String mVerificationId,phonenumber;
+    private String mVerificationId,phonenumber = reset.resetnumber;
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
     public static EditText mPhoneNumberField;
-    private EditText mVerificationField;
 
+    private EditText mVerificationField;
+    public static int type = 0;
     private Button mStartButton;
     private Button mVerifyButton;
     private TextView mResendButton;
@@ -257,9 +261,46 @@ public class verifyreset extends AppCompatActivity implements View.OnClickListen
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            Intent tonewpass = new Intent(verifyreset.this,passreset.class);
-                            startActivity(tonewpass);
-                            finish();
+                            db.collection("users").whereEqualTo("phone",reset.resetnumber).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                                @Override
+                                public void onSuccess(QuerySnapshot d) {
+                                    if ( !d.isEmpty()){
+                                        for (DocumentSnapshot d1 : d){
+                                            if (d1.getId() != mAuth.getUid()) {
+
+                                                db.collection("users").document(mAuth.getUid())
+                                                        .set(Objects.requireNonNull(d1.getData()));
+                                                db.collection("users").document(d1.getId()).delete();
+                                            }
+
+
+                                        }
+                                    }
+                                }
+                            });
+
+                            db.collection("admins").whereEqualTo("phone",reset.resetnumber).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                                @Override
+                                public void onSuccess(QuerySnapshot d) {
+                                    if ( !d.isEmpty()){
+                                        for (DocumentSnapshot d1 : d){
+                                            if (d1.getId() != mAuth.getUid()) {
+
+                                                db.collection("admins").document(mAuth.getUid())
+                                                        .set(Objects.requireNonNull(d1.getData()));
+                                                db.collection("admins").document(d1.getId()).delete();
+                                            }
+
+
+                                        }
+                                    }
+                                }
+                            });
+
+
+                            log();
 
                         } else {
                             // Sign in failed, display a message and update the UI
@@ -339,4 +380,88 @@ public class verifyreset extends AppCompatActivity implements View.OnClickListen
         startActivity(login);
         finish();
     }
+
+
+
+    public void log(){
+
+
+        db.collection("users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if(task.getResult().exists()){
+                    Intent intent = new Intent(verifyreset.this, profile.class);//creating a new intent pointing to Profile
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);//starting this new intent
+                }
+                else{
+
+                    db.collection("admin").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                if(!Objects.requireNonNull(task.getResult()).exists()) {
+                                    mAuth.getCurrentUser().delete();
+                                    Toast.makeText(verifyreset.this, "Your Account was Deleted.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+
+                        }
+                    });
+
+                    db.collection("admin").document(mAuth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot d2) {
+                            Intent admin;
+                            String unit_ = d2.getString("unit");
+
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("unit",unit_);
+                            editor.apply();
+
+
+                            if(d2.get("type")==null){
+
+                                mAuth.signOut();
+
+                                return;
+                            }
+
+                            type = (int) (long)d2.get("approved");
+                            switch(type){
+                                case 0 : admin = new Intent(verifyreset.this,waiting.class);
+                                    break;
+                                case 1 : admin = new Intent(verifyreset.this,admin.class);
+                                    break;
+                                default : admin = new Intent(verifyreset.this,waiting.class);
+
+
+                            }
+
+                            startActivity(admin);
+                            finish();
+
+
+                        }
+                    });
+
+
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+    }
+
 }

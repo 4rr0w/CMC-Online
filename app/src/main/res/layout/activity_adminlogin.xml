@@ -128,12 +128,37 @@
             </LinearLayout>
 
             <LinearLayout
+            android:id="@+id/lnemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_below="@id/lnphone"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/tvemail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorWhite"
+                android:hint="Email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorHint"
+                android:textSize="16sp"
+                android:maxLines="1"
+                />
+
+        </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/lnlocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:layout_below="@+id/lnphone">
+                android:layout_below="@+id/lnemail">
 
 
                 <EditText

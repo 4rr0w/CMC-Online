@@ -27,9 +27,9 @@ import java.util.regex.Pattern;
 
 public class adminlogin extends AppCompatActivity {
 
-    public static EditText fname, lname, phone, password,password2, location;
+    public static EditText fname, lname, phone, password,password2, location,email;
     Spinner type, unit;
-    public static String unit_str, firstname, lastname, phonenumber,loc,pass;
+    public static String unit_str, firstname, lastname, phonenumber,loc,pass,emailstr;
     public static int t;
 
     Button signup;
@@ -66,6 +66,7 @@ public class adminlogin extends AppCompatActivity {
         type = findViewById(R.id.tvtype);
         unit = findViewById(R.id.tvunit);
         signup = findViewById(R.id.btsignup);
+        email = findViewById(R.id.tvemail);
 
 
 
@@ -150,6 +151,12 @@ public class adminlogin extends AppCompatActivity {
                     is_valid =false;
                 }
 
+                if(email.getText().toString().trim().equals("")){
+                    email.setError("Enter a valid Email.");
+                    is_valid = false;
+
+                }
+
 
                 if (password.getText().toString().trim().equalsIgnoreCase("")) {
                     password.setError("This field can not be blank");
@@ -193,6 +200,7 @@ public class adminlogin extends AppCompatActivity {
                     phonenumber = phone.getText().toString();
                     loc = location.getText().toString();
                     pass = password.getText().toString();
+                    emailstr = email.getText().toString();
 
 
                     Intent tootp = new Intent(adminlogin.this,otp2.class);

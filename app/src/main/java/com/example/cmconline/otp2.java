@@ -56,7 +56,7 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
 
     // [START declare_auth]
     private FirebaseAuth mAuth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db= FirebaseFirestore.getInstance(),db2 = FirebaseFirestore.getInstance();
     // [END declare_auth]
 
 
@@ -260,7 +260,7 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
                             Log.d(TAG, "signInWithCredential:success");
 
 
-                            mAuth.createUserWithEmailAndPassword(adminlogin.phonenumber+"@cmcfirebase.in", adminlogin.pass)
+                            mAuth.createUserWithEmailAndPassword(adminlogin.emailstr, adminlogin.pass)
                                     .addOnCompleteListener(otp2.this, new OnCompleteListener<AuthResult>() {
                                         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                         @Override
@@ -284,8 +284,12 @@ public class otp2 extends AppCompatActivity implements View.OnClickListener {
                                                 db.collection("admin").document(mAuth.getUid())
                                                         .set(userdetails);
 
+                                                Map<String, Object> usermail = new HashMap<>();
+                                                usermail.put("email",adminlogin.emailstr);
+                                                db2.collection("emails").document(adminlogin.phonenumber).set(usermail);
 
-                                                Intent intent =  new Intent(otp2.this,admin.class);
+
+                                                Intent intent =  new Intent(otp2.this,login.class);
                                                 startActivity(intent);
                                                 finish();
 

@@ -252,7 +252,7 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
                             Log.d(TAG, "signInWithCredential:success");
 
 
-                            mAuth.createUserWithEmailAndPassword(signup.phonenumber+"@cmcfirebase.in", pass)
+                            mAuth.createUserWithEmailAndPassword(signup.emailstr, pass)
                                     .addOnCompleteListener(otp.this, new OnCompleteListener<AuthResult>() {
                                         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                                         @Override
@@ -284,6 +284,10 @@ public class otp extends AppCompatActivity implements View.OnClickListener {
 
                                                 db.collection("users").document(mAuth.getUid())
                                                         .set(userdetails);
+
+                                                Map<String, Object> usermail = new HashMap<>();
+                                                usermail.put("email",signup.emailstr);
+                                                db.collection("emails").document(signup.phonenumber).set(usermail);
 
 
                                                 Intent intent =  new Intent(otp.this,profile.class);

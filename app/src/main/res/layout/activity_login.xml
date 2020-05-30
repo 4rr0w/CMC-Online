@@ -99,15 +99,35 @@
                     android:maxLines="1"
 
                     />
-
             </LinearLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btlogin"
+            <LinearLayout
+                android:id="@+id/lnotplogin"
+                android:layout_marginTop="20dp"
                 android:layout_below="@id/lnpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/otplogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Forgot Password? Login with OTP"
+                    android:textColor="@color/colorWhite"/>
+
+
+
+            </LinearLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btlogin"
+                android:layout_below="@id/lnotplogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:text="@string/Login"
                 android:textAllCaps="false"
@@ -147,9 +167,6 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="16dp" />
-
-
-
 
 
 

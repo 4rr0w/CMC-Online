@@ -32,10 +32,9 @@ import java.util.regex.Pattern;
 public class signup extends AppCompatActivity {
     DatePickerDialog picker;
     DatabaseReference dref;
-    public static EditText fname, lname, phone, departure, expctedarrival ,password,password2, location,numpeople;
+    public static EditText fname, lname, phone, departure, expctedarrival ,password,password2, location,numpeople,email;
     Spinner zone, unit;
-    public static String zone_str, unit_str, firstname, lastname, phonenumber,depdate,exparrdate,loc,pass,people;
-
+    public static String zone_str, unit_str, firstname, lastname, phonenumber,depdate,exparrdate,loc,pass,people,emailstr;
     Button signup;
     boolean is_valid;
 
@@ -74,6 +73,7 @@ public class signup extends AppCompatActivity {
         unit = findViewById(R.id.tvunit);
         signup = findViewById(R.id.btsignup);
         numpeople = findViewById(R.id.tvperson);
+        email = findViewById(R.id.tvemail);
 
 
 
@@ -201,6 +201,12 @@ public class signup extends AppCompatActivity {
                 }
                 is_valid = true;
 
+                if(email.getText().toString().trim().equals("")){
+                    email.setError("Enter a valid Email.");
+                    is_valid = false;
+
+                }
+
 
 
                 if (fname.getText().toString().trim().equalsIgnoreCase("")) {
@@ -282,6 +288,7 @@ public class signup extends AppCompatActivity {
                     loc = location.getText().toString();
                     pass = password.getText().toString();
                     people = numpeople.getText().toString();
+                    emailstr = email.getText().toString();
 
                     Intent tootp = new Intent(signup.this,otp.class);
                     startActivity(tootp);

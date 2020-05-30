@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +35,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 public class login extends AppCompatActivity {
     EditText phone, password;
+    TextView otplogin;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private ProgressDialog progress;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -53,7 +55,20 @@ public class login extends AppCompatActivity {
 
         phone = findViewById(R.id.tvphone);
         password = findViewById(R.id.tvpassword);
+        otplogin = findViewById(R.id.otplogin);
         mAuth = FirebaseAuth.getInstance();
+
+
+        otplogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent totoplogin = new Intent(login.this,reset.class);
+                startActivity(totoplogin);
+                finish();
+
+            }
+        });
 
 
 
@@ -65,11 +80,30 @@ public class login extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                if (fields()) {
-                    loadingDialog.startLoadingDialog();
+                loadingDialog.startLoadingDialog();
 
-                    validate(phone.getText().toString(), password.getText().toString());
+                if (fields()) {
+                    db.collection("emails").document(phone.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot document) {
+
+                            validate(document.getString("email"), password.getText().toString());
+                            Toast.makeText(login.this, document.getString("email"), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(login.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+                }else {
+                    Toast.makeText(login.this, "failed", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
         });
 
@@ -123,7 +157,7 @@ public class login extends AppCompatActivity {
 
 
     private void validate(String userName, String Password) {//this function validate user with Firebase database
-        mAuth.signInWithEmailAndPassword(userName+"@cmcfirebase.in", Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(userName, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -147,7 +181,6 @@ public class login extends AppCompatActivity {
             phone.setError("This field can not be blank");
             is_valid =false;
         }
-
         if (!Pattern.compile("\\d{10}").matcher(phone.getText().toString().trim()).matches()) {
             phone.setError("Invalid Number");
             is_valid =false;
@@ -159,8 +192,7 @@ public class login extends AppCompatActivity {
 
     public void log(){
 
-
-        db.collection("users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+           db.collection("users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 

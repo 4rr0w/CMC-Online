@@ -39,18 +39,15 @@ public class reset extends AppCompatActivity {
             public void onClick(View v) {
 
                 boolean is_valid = true;
-                if (!Pattern.compile("\\d{10}").matcher(resetphone.getText().toString().trim()).matches()) {
-                    resetphone.setError("Invalid Number");
-                    is_valid =false;
-                }
+
                 if (resetphone.getText().toString().trim().equals("")) {
-                    resetphone.setError("Invalid Number");
+                    resetphone.setError("Invalid Email");
                     is_valid =false;
                 }
                  if (is_valid){
                      resetnumber = resetphone.getText().toString();
 
-                     firebaseAuth.fetchSignInMethodsForEmail(resetnumber+ "@cmcfirebase.in")
+                     firebaseAuth.fetchSignInMethodsForEmail(resetnumber)
                              .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                                  @Override
                                  public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
@@ -62,9 +59,21 @@ public class reset extends AppCompatActivity {
                                          resetphone.setText("");
                                      } else {
 
-                                         Intent toresetopt = new Intent(reset.this, verifyreset.class);
-                                         startActivity(toresetopt);
-                                         finish();
+                                         firebaseAuth.sendPasswordResetEmail(resetnumber)
+                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                     @Override
+                                                     public void onComplete(@NonNull Task<Void> task) {
+                                                         if (task.isSuccessful()) {
+                                                             sendresetotp.setEnabled(false);
+                                                             Toast.makeText(reset.this, "Email is sent to :  " + resetnumber, Toast.LENGTH_SHORT).show();
+                                                         }
+                                                     }
+                                                 });
+
+
+//                                         Intent toresetopt = new Intent(reset.this, verifyreset.class);
+//                                         startActivity(toresetopt);
+//                                         finish();
 
                                      }
 
