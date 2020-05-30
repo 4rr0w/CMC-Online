@@ -35,6 +35,20 @@ public class reset extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+        public static boolean isValid()
+        {
+            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                    "[a-zA-Z0-9_+&*-]+)*@" +
+                    "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                    "A-Z]{2,7}$";
+
+            Pattern pat = Pattern.compile(emailRegex);
+            if (== null)
+                return false;
+            return pat.matcher().matches();
+        }
+
         sendresetotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,44 +61,58 @@ public class reset extends AppCompatActivity {
                 }
                  if (is_valid){
                      resetnumber = resetphone.getText().toString();
+                     boolean validmail;
 
-                     firebaseAuth.fetchSignInMethodsForEmail(resetnumber)
-                             .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                                 @Override
-                                 public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                     String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                             "[a-zA-Z0-9_+&*-]+)*@" +
+                             "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                             "A-Z]{2,7}$";
 
-                                     boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
+                     Pattern pat = Pattern.compile(emailRegex);
+                     validmail = pat.matcher(resetnumber).matches();
 
-                                     if (isNewUser) {
-                                         Toast.makeText(reset.this, "Account doesn't exist.", Toast.LENGTH_SHORT).show();
-                                         resetphone.setText("");
-                                     } else {
+                     if(validmail) {
 
-                                         firebaseAuth.sendPasswordResetEmail(resetnumber)
-                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                     @Override
-                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                         if (task.isSuccessful()) {
-                                                             sendresetotp.setEnabled(false);
-                                                             Toast.makeText(reset.this, "Email is sent to :  " + resetnumber, Toast.LENGTH_SHORT).show();
+                         firebaseAuth.fetchSignInMethodsForEmail(resetnumber)
+                                 .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                                     @Override
+                                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+
+                                         boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
+
+                                         if (isNewUser) {
+                                             Toast.makeText(reset.this, "Account doesn't exist.", Toast.LENGTH_SHORT).show();
+                                             resetphone.setText("");
+                                         } else {
+
+                                             firebaseAuth.sendPasswordResetEmail(resetnumber)
+                                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                         @Override
+                                                         public void onComplete(@NonNull Task<Void> task) {
+                                                             if (task.isSuccessful()) {
+                                                                 sendresetotp.setEnabled(false);
+                                                                 Toast.makeText(reset.this, "Email is sent to :  " + resetnumber, Toast.LENGTH_SHORT).show();
+                                                             }
                                                          }
-                                                     }
-                                                 });
+                                                     });
 
 
 //                                         Intent toresetopt = new Intent(reset.this, verifyreset.class);
 //                                         startActivity(toresetopt);
 //                                         finish();
 
-                                     }
+                                         }
 
-                                 }
-                             }).addOnFailureListener(new OnFailureListener() {
-                         @Override
-                         public void onFailure(@NonNull Exception e) {
-                             Toast.makeText(reset.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                         }
-                     });
+                                     }
+                                 }).addOnFailureListener(new OnFailureListener() {
+                             @Override
+                             public void onFailure(@NonNull Exception e) {
+                                 Toast.makeText(reset.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                             }
+                         });
+                     } else{
+                         Toast.makeText(reset.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+                     }
                  }
 
             }
