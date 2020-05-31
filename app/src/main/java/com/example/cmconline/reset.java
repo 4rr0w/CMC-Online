@@ -26,6 +26,14 @@ public class reset extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     @Override
+    public void onBackPressed() {
+
+        Intent login = new Intent(reset.this,login.class);
+        startActivity(login);
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset);
