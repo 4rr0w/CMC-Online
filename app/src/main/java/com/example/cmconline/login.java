@@ -88,8 +88,7 @@ public class login extends AppCompatActivity {
                         public void onSuccess(DocumentSnapshot document) {
 
                             validate(document.getString("email"), password.getText().toString());
-                            Toast.makeText(login.this, document.getString("email"), Toast.LENGTH_SHORT).show();
-
+                            
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

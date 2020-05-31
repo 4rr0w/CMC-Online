@@ -80,7 +80,7 @@ public class reset extends AppCompatActivity {
                                                          public void onComplete(@NonNull Task<Void> task) {
                                                              if (task.isSuccessful()) {
                                                                  sendresetotp.setEnabled(false);
-                                                                 Toast.makeText(reset.this, "Email is sent to :  " + resetnumber, Toast.LENGTH_SHORT).show();
+                                                                 Toast.makeText(reset.this, "Password reset link is sent to :  " + resetnumber, Toast.LENGTH_SHORT).show();
                                                              }
                                                          }
                                                      });

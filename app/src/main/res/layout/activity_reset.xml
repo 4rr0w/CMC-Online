@@ -46,7 +46,9 @@
         android:id="@+id/resetpassphone"
         android:layout_width="289dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:backgroundTint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorHint"
         android:ems="10"
         android:hint="Enter Email"
         android:inputType="textEmailAddress"
@@ -59,11 +61,15 @@
         app:layout_constraintTop_toBottomOf="@+id/heading"
         app:layout_constraintVertical_bias="0.358" />
 
+
+
+
+
     <Button
         android:id="@+id/sendotp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Otp"
+        android:text="Send Link"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.826"
