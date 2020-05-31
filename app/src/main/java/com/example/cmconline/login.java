@@ -97,14 +97,27 @@ public class login extends AppCompatActivity {
                                         db.collection("emails").document(phone.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                             @Override
                                             public void onSuccess(DocumentSnapshot document) {
-                                                email = document.getString("email");
-                                               mAuth.signOut();
-                                                validate(email, password.getText().toString());
+                                                if(document.exists()) {
+                                                    email = document.getString("email");
+                                                    mAuth.getCurrentUser().delete();
+                                                    mAuth.signOut();
+
+
+                                                        validate(email, password.getText().toString());
+
+                                                }else {
+                                                    loadingDialog.dismissDialog();
+                                                    mAuth.getCurrentUser().delete();
+                                                    mAuth.signOut();
+                                                    phone.setError("Wrong Phone or Password");
+                                                }
 
                                             }
                                         }).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
+                                                mAuth.getCurrentUser().delete();
+                                                mAuth.signOut();
                                                 Toast.makeText(login.this, e.toString(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -113,6 +126,7 @@ public class login extends AppCompatActivity {
 
 
                                     }else{
+                                        mAuth.getCurrentUser().delete();
                                         mAuth.signOut();
                                         loadingDialog.dismissDialog();
                                     }
@@ -193,7 +207,7 @@ public class login extends AppCompatActivity {
                     log();
                 } else {
 
-                    phone.setError("Wrong Username or Password!");
+                    phone.setError("Wrong Phone or Password!");
                     Toast.makeText(login.this, "Login Failed!!", Toast.LENGTH_SHORT).show();
                     loadingDialog.dismissDialog();
 
