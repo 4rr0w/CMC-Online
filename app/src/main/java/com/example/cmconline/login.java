@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -82,25 +83,53 @@ public class login extends AppCompatActivity {
             public void onClick(View v){
                 loadingDialog.startLoadingDialog();
 
-                if (fields()) {
-                    db.collection("emails").document(phone.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot document) {
-
-                            validate(document.getString("email"), password.getText().toString());
-                            
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(login.this, e.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
 
 
-                }else {
-                    Toast.makeText(login.this, "failed", Toast.LENGTH_SHORT).show();
-                }
+                mAuth.signInAnonymously()
+                        .addOnCompleteListener(login.this, new OnCompleteListener<AuthResult>() {
+                            String email;
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+
+                                    if (fields()) {
+                                        db.collection("emails").document(phone.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot document) {
+                                                email = document.getString("email");
+                                               mAuth.signOut();
+                                                validate(email, password.getText().toString());
+
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(login.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+
+
+
+                                    }else{
+                                        mAuth.signOut();
+                                        loadingDialog.dismissDialog();
+                                    }
+
+
+
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Toast.makeText(login.this, task.getException().getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                    loadingDialog.dismissDialog();
+
+                                }
+
+                                // ...
+                            }
+                        });
 
 
             }
@@ -191,7 +220,10 @@ public class login extends AppCompatActivity {
 
     public void log(){
 
-           db.collection("users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+
+
+
+        db.collection("users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 

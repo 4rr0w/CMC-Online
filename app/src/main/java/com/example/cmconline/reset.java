@@ -74,6 +74,8 @@ public class reset extends AppCompatActivity {
                                              resetphone.setText("");
                                          } else {
 
+
+
                                              firebaseAuth.sendPasswordResetEmail(resetnumber)
                                                      .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                          @Override
