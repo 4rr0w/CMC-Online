@@ -38,13 +38,6 @@ public class adminlogin extends AppCompatActivity {
 
 
     @Override
-    protected void onStart() {
-        super.onStart();
-
-
-
-    }
-    @Override
     public void onBackPressed() {
 
         Intent login = new Intent(adminlogin.this,login.class);
