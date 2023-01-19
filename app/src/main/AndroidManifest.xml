@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cmconline">
+    package="com.example.cmconlineproject">
 
     <application
         android:allowBackup="true"
@@ -9,23 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".verifyreset" />
-        <activity android:name=".reset" />
-        <activity android:name=".medical" />
-        <activity android:name=".waiting" />
-        <activity android:name=".otp2" />
-        <activity android:name=".adminlogin" />
-        <activity android:name=".userapprove" />
-        <activity android:name=".admin" />
-        <activity android:name=".profile" />
-        <activity android:name=".otp" />
-        <activity android:name=".sign" />
-        <activity android:name=".signup" />
-        <activity android:name=".login" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.cmconlineproject.verifyreset" />
+        <activity android:name="com.example.cmconlineproject.reset" />
+        <activity android:name="com.example.cmconlineproject.medical" />
+        <activity android:name="com.example.cmconlineproject.waiting" />
+        <activity android:name="com.example.cmconlineproject.otp2" />
+        <activity android:name="com.example.cmconlineproject.adminlogin" />
+        <activity android:name="com.example.cmconlineproject.userapprove" />
+        <activity android:name="com.example.cmconlineproject.admin" />
+        <activity android:name="com.example.cmconlineproject.profile" />
+        <activity android:name="com.example.cmconlineproject.otp" />
+        <activity android:name="com.example.cmconlineproject.sign" />
+        <activity android:name="com.example.cmconlineproject.signup" />
+        <activity android:name="com.example.cmconlineproject.login" />
+        <activity android:name="com.example.cmconlineproject.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

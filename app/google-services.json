@@ -1,42 +1,33 @@
 {
   "project_info": {
-    "project_number": "41901417527",
-    "firebase_url": "https://cmc-online.firebaseio.com",
-    "project_id": "cmc-online",
-    "storage_bucket": "cmc-online.appspot.com"
+    "project_number": "610199517948",
+    "project_id": "cmcproject-c38e4",
+    "storage_bucket": "cmcproject-c38e4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:41901417527:android:48a9440779044c77cb4bb2",
+        "mobilesdk_app_id": "1:610199517948:android:ebca2c39e968af7c447579",
         "android_client_info": {
-          "package_name": "com.example.cmconline"
+          "package_name": "com.example.cmconlineproject"
         }
       },
       "oauth_client": [
         {
-          "client_id": "41901417527-3jr3ftc2rasv8e3b8v6bu3d0n6p08c5h.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.cmconline",
-            "certificate_hash": "d5c36255ac2e8d49935a1bc18a92764f7d42e60d"
-          }
-        },
-        {
-          "client_id": "41901417527-tbe443e5a4fc2g7e8opesrm9698d7n6h.apps.googleusercontent.com",
+          "client_id": "610199517948-mflku8ftgek3v6g2pr755a9e6f8jahkm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCEsP0IKoq7fTlSZawXFVy3xfUdqzMNOHQ"
+          "current_key": "AIzaSyCpgvE-VB7oMg-IzwBWMUaqZXYP8ehg1Cc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "41901417527-tbe443e5a4fc2g7e8opesrm9698d7n6h.apps.googleusercontent.com",
+              "client_id": "610199517948-mflku8ftgek3v6g2pr755a9e6f8jahkm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
